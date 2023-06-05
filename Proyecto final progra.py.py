@@ -2,12 +2,30 @@ import tkinter as tk
 import random
 import numpy as np
 
+
+
 def f_clic_boton(fila, columna):
     # Obtenmos el valor del boton que fue pulsado
     boton_clic = ventana_matriz.grid_slaves(row=fila, column=columna)[0]
     valor_boton = boton_clic.cget("text")
     boton_clic.configure(bg="yellow")
     print("Valor del botón clickeado:", valor_boton)
+    etiqueta = tk.Label(ventanaPrincipal, font=("Helvetica", 48))
+    etiqueta.pack(pady=20)
+
+    # Inicializar el valor de los segundos en 25
+    segundos = 25
+
+    # Función para actualizar la etiqueta con el valor actual de segundos
+    def actualizar_etiqueta():
+        nonlocal segundos
+        etiqueta.config(text=str(segundos))
+        if segundos > 0:
+            segundos -= 1
+            etiqueta.after(1000, actualizar_etiqueta)
+
+    # Llamar a la función para iniciar la cuenta regresiva
+    actualizar_etiqueta()
 
     # Obtenemos los valores de los botones que rodean al boton pulsado y los guardamos en un vector
     valores_adyacentes = []
@@ -85,6 +103,7 @@ def crear_matriz(tamanio):
     jugador1_label.pack()
     jugador2_label = tk.Label(ventanaPrincipal, text=jugador2)
     jugador2_label.pack()
+    
 
     global tamanio_matriz_ingresado
     tamanio_matriz_ingresado = tamanio
@@ -103,6 +122,7 @@ def iniciarJuego():
 ventanaPrincipal = tk.Tk()
 ventanaPrincipal.title("Ventana Principal")
 ventanaPrincipal.geometry("450x450")
+ventanaPrincipal.resizable(1,1)
 ventanaPrincipal.iconbitmap("Logo-Meso-Color.ico")
 
 # Etiqueta y entrada para el jugador 1
