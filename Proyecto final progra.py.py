@@ -2,7 +2,8 @@ import tkinter as tk
 import random
 import numpy as np
 
-#PROYECTO Final PROGRAMACION 1 
+#PROYECTO Final PROGRAMACION 1
+#Version 1.265
 #Programadores: 
 #    Elder Geovany Yac Mul - 202007018
 #    Andres Fernando Gonzalez Alcantara - 202308061
@@ -151,9 +152,13 @@ def opciones_respuesta():
                 button.grid(row=i, column=j)
 
 def f_clic_botones_opciones(fila, columna):
+
     boton_clic_op = ventana_opciones.grid_slaves(row=fila, column=columna)[0]
     valor_boton_op = boton_clic_op.cget("text")
     print("Valor del botón clickeado:", valor_boton_op)
+
+    #if(resultado == valor_boton_op):
+
 
 ventanaPrincipal = tk.Tk()
 ventanaPrincipal.title("Ventana Principal")
