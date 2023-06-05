@@ -146,8 +146,8 @@ tamanio_entry.pack()
 # Cantidad de turnos por jugador
 turnos_label = tk.Label(ventanaPrincipal, text="Ingrese la cantidad de Turnos por Jugador:")
 turnos_label.pack()
-turnos_label = tk.Entry(ventanaPrincipal)
-turnos_label.pack()
+turnos_entry = tk.Entry(ventanaPrincipal)
+turnos_entry.pack()
 
 # Botón para iniciar el juego
 boton_inicio = tk.Button(ventanaPrincipal, text="Iniciar Juego", command=iniciarJuego)
