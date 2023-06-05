@@ -9,10 +9,10 @@ import numpy as np
 #    Denis Alexander Lucas Ramirez - 202207036
 
 def f_clic_boton(fila, columna):
-    # Obtenmos el valor del boton que fue pulsado
+    # Obtenemos el valor del boton que fue pulsado
     boton_clic = ventana_matriz.grid_slaves(row=fila, column=columna)[0]
     valor_boton = boton_clic.cget("text")
-    boton_clic.configure(bg="red")
+    boton_clic.configure(bg="red",state="disable")
     print("Valor del botón clickeado:", valor_boton)
 
     global ventana_cronometro
@@ -140,28 +140,20 @@ def iniciarJuego():
 def opciones_respuesta():
     global ventana_opciones
     ventana_opciones = tk.Toplevel(ventana_matriz)
+    for i in range(0,2,1):
+        for j in range(0,2,1):
+            valor = random.randint(0,1000)
+            if (i == 1 and j == 1):
+                button = tk.Button(ventana_opciones, text=resultado, width=10, height=5, command=lambda fila=i, columna=j, bg="red": f_clic_botones_opciones(fila, columna))
+                button.grid(row=i, column=j)
+            else:
+                button = tk.Button(ventana_opciones, text=valor, width=10, height=5, command=lambda fila=i, columna=j, bg="red": f_clic_botones_opciones(fila, columna))
+                button.grid(row=i, column=j)
 
-    opcion1 = tk.Label(ventana_opciones, text="Opcion 1:")
-    opcion1.pack()
-    op1=random.randint(0,1000)
-    opcion1 = tk.Label(ventana_opciones, text=op1)
-    opcion1.pack()
-    opcion2 = tk.Label(ventana_opciones, text="Opcion 2:")
-    opcion2.pack()
-    op2=random.randint(0,1000)
-    opcion2 = tk.Label(ventana_opciones, text=op2)
-    opcion2.pack()
-    opcion3 = tk.Label(ventana_opciones, text="Opcion 3:")
-    opcion3.pack()
-    op3=random.randint(0,1000)
-    opcion3 = tk.Label(ventana_opciones, text=op3)
-    opcion3.pack()
-    opcion4 = tk.Label(ventana_opciones, text="Opcion 4:")
-    opcion4.pack()
-    op4=random.randint(0,1000)
-    opcion4 = tk.Label(ventana_opciones, text=resultado)
-    opcion4.pack()
-    
+def f_clic_botones_opciones(fila, columna):
+    boton_clic_op = ventana_opciones.grid_slaves(row=fila, column=columna)[0]
+    valor_boton_op = boton_clic_op.cget("text")
+    print("Valor del botón clickeado:", valor_boton_op)
 
 ventanaPrincipal = tk.Tk()
 ventanaPrincipal.title("Ventana Principal")
