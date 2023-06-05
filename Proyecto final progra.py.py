@@ -157,7 +157,12 @@ def f_clic_botones_opciones(fila, columna):
     valor_boton_op = boton_clic_op.cget("text")
     print("Valor del botón clickeado:", valor_boton_op)
 
-    #if(resultado == valor_boton_op):
+    if(resultado == int(valor_boton_op)):
+        print("Respuesta Correcta UwU")
+    else:
+        print("Error. Respuesta Incorrecta UwU")
+        ventana_cronometro.destroy()
+        ventana_opciones.destroy()
 
 
 ventanaPrincipal = tk.Tk()
