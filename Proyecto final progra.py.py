@@ -157,14 +157,34 @@ def f_clic_botones_opciones(fila, columna):
     valor_boton_op = boton_clic_op.cget("text")
     print("Valor del botón clickeado:", valor_boton_op)
     global contador_puntos
-    if(resultado == int(valor_boton_op)):
-        print("Respuesta Correcta UwU")
+    global turnos
+    if(turnos == 2):
+        global ventana_ganador
+        jugador1 = jugador1_entry.get()
+        jugador2 = jugador2_entry.get()
+        ventana_ganador = tk.Toplevel(ventana_matriz)
+        ventana_ganador.title("Finalizar juego")
+        ventana_ganador.geometry("450x450")
+
+        jugador1_label = tk.Label(ventana_ganador, text=jugador1)
+        jugador1_label.pack()
+        jugador2_label = tk.Label(ventana_ganador, text=jugador2)
+        jugador2_label.pack()
+
+        ventana_cronometro.destroy()
+        ventana_matriz.destroy()
         ventana_opciones.destroy()
-        contador_puntos+=3
     else:
-        print("Error. Respuesta Incorrecta UwU")
-        ventana_opciones.destroy()
-        
+        if(resultado == int(valor_boton_op)):
+            print("Respuesta Correcta UwU")
+            ventana_opciones.destroy()
+            contador_puntos+=3
+            turnos+=1
+        else:
+            print("Error. Respuesta Incorrecta UwU")
+            ventana_opciones.destroy()
+            turnos+=1
+
     print("El contador de puntos es:", contador_puntos)
 
 contador_puntos = 0
@@ -197,6 +217,7 @@ turnos_label = tk.Label(ventanaPrincipal, text="Ingrese la cantidad de Turnos po
 turnos_label.pack()
 turnos_entry = tk.Entry(ventanaPrincipal)
 turnos_entry.pack()
+turnos = 0
 
 # Botón para iniciar el juego
 boton_inicio = tk.Button(ventanaPrincipal, text="Iniciar Juego", command=iniciarJuego)
