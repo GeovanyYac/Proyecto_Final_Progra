@@ -18,7 +18,7 @@ def f_clic_boton(fila, columna):
 
     global ventana_cronometro
     ventana_cronometro = tk.Toplevel(ventana_matriz)
-
+    
     etiqueta = tk.Label(ventana_cronometro, font=("Helvetica", 48))
     etiqueta.pack(pady=20)
 
@@ -34,14 +34,14 @@ def f_clic_boton(fila, columna):
             etiqueta.after(1000, actualizar_etiqueta)
 
         if (segundos==0):
-            bt_abajo.configure(bg="black")
-            bt_arriba.configure(bg="black")
-            bt_der.configure(bg="black")
-            bt_izq.configure(bg="black")
             bt_der_abj.configure(bg="black")
             bt_der_arr.configure(bg="black")
             bt_izq_arr.configure(bg="black")
             bt_izq_abj.configure(bg="black")
+            bt_abajo.configure(bg="black")
+            bt_arriba.configure(bg="black")
+            bt_der.configure(bg="black")
+            bt_izq.configure(bg="black")
             ventana_cronometro.destroy()
             ventana_opciones.destroy()
 
@@ -156,15 +156,18 @@ def f_clic_botones_opciones(fila, columna):
     boton_clic_op = ventana_opciones.grid_slaves(row=fila, column=columna)[0]
     valor_boton_op = boton_clic_op.cget("text")
     print("Valor del botón clickeado:", valor_boton_op)
-
+    global contador_puntos
     if(resultado == int(valor_boton_op)):
         print("Respuesta Correcta UwU")
+        ventana_opciones.destroy()
+        contador_puntos+=3
     else:
         print("Error. Respuesta Incorrecta UwU")
-        ventana_cronometro.destroy()
         ventana_opciones.destroy()
+        
+    print("El contador de puntos es:", contador_puntos)
 
-
+contador_puntos = 0
 ventanaPrincipal = tk.Tk()
 ventanaPrincipal.title("Ventana Principal")
 ventanaPrincipal.geometry("450x450")
